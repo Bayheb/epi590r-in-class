@@ -1,3 +1,3 @@
 # EPI590R repo
 
-This repository belongs to Bailey Hebermehl(terminal)
+This repository belongs to Bailey Hebermehl.
