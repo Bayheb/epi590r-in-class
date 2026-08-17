@@ -81,4 +81,45 @@ tbl_summary(
   # add a caption
   modify_caption("**Participant characteristics**")
 
+# 3-7 Practice
 
+tbl_summary(
+	nlsy,
+	by = sex_cat,
+	digits = list(income ~ 3,
+								starts_with("sleep")~1),
+	include = c(
+		region_cat, race_eth_cat,
+		income, starts_with("sleep")
+	),
+	label = list(
+		region_cat ~ "Region",
+		race_eth_cat ~ "Race/ethnicity",
+		income ~ "Income",
+		sleep_wkdy ~ "Weekday hours of sleep",
+		sleep_wknd ~ "Weekend hours of sleep"
+	),
+	statistic = list(
+		starts_with("sleep") ~ "{min}; {max}",
+		income ~ "{mean} ({p10}, {p90})"
+	),
+
+	missing_text = "Missing"
+) |> #piping!
+	#compare sex_cat w p-value
+	add_p(test = list(
+		all_continuous() ~ "t.test",
+		all_categorical() ~ "chisq.test"
+	)) |>
+	#overall column combining both sexes
+	add_overall(col_label = "**Total** N = {N}") |>
+	bold_labels() |>
+	# remove the default footnotes
+	modify_footnote_body(
+		footnote = "https://www.nlsinfo.org/content/cohorts/nlsy79/topical-guide/household/race-ethnicity-immigration-data",
+		columns = "label",
+		rows = variable == "race_eth_cat" & row_type == "label"
+	)
+	modify_header(label = "**Variable**", p.value = "**P**") |>
+	# add a caption
+	modify_caption("**Table One**")
