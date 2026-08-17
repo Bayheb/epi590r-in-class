@@ -83,11 +83,12 @@ tbl_summary(
 
 # 3-7 Practice
 
-tbl_summary(
+nlsy_table_one <-
+	tbl_summary(
 	nlsy,
 	by = sex_cat,
 	digits = list(income ~ 3,
-								starts_with("sleep")~1),
+								starts_with("sleep") ~ 1),
 	include = c(
 		region_cat, race_eth_cat,
 		income, starts_with("sleep")
