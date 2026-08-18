@@ -99,4 +99,4 @@ The median hours of sleep participants got over the weekend is `r inline_text(sl
 inline_text(sleep_table, variable = "sleep_wknd", 
 						column = "stat_0")
 ```
-In the sample, the average sleep on weekends was `r inline_text(sleep_table, variable = "sleep_wknd", column = "stat_0")`.
+In the sample, the average sleep on weekends was `r inline_text(sleep_table, variable = "sleep_wknd", pattern = "{median}")`.
